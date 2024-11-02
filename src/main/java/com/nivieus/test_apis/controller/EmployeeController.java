@@ -32,7 +32,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees/{employeeId}")
-    public ResponseEntity<Employee> postEmployee(@RequestBody  Employee employee){
+    public ResponseEntity<Employee> postEmployee(@PathVariable("employeeId") String employeeId, @RequestBody  Employee employee){
 
         return  ResponseEntity.ok(employeeService.postEmployee(employee));
     }

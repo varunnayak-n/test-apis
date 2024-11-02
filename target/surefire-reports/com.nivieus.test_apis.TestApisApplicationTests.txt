@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.nivieus.test_apis.TestApisApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.105 s -- in com.nivieus.test_apis.TestApisApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.782 s -- in com.nivieus.test_apis.TestApisApplicationTests
