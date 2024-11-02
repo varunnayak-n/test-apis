@@ -1,0 +1,57 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "varun-assignment-4"
+  namespace: "default"
+  labels:
+    app: "varun-assignment-4"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "varun-assignment-4"
+  template:
+    metadata:
+      labels:
+        app: "varun-assignment-4"
+    spec:
+      containers:
+        - name: "test-api-sha256-1"
+          image: "asia-south1-docker.pkg.dev/niveustraining/varun-api/test-api@sha256:6d6c662d34205e13880ad8e2dd6835de1e3e0eceec0e8d1cf3ee2d3b2959432f"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "varun-assignment-4-hpa-gxsg"
+  namespace: "default"
+  labels:
+    app: "varun-assignment-4"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "varun-assignment-4"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+    - type: "Resource"
+      resource:
+        name: "cpu"
+        targetAverageUtilization: 80
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "varun-assignment-4-service"
+  namespace: "default"
+  labels:
+    app: "varun-assignment-4"
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 8080
+  selector:
+    app: "varun-assignment-4"
+  type: "LoadBalancer"
